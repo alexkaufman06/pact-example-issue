@@ -4,7 +4,7 @@ import { testClient } from "utils/hlClient";
 
 const pact = new PactV3({
   dir: path.resolve(process.cwd(), "contract-tests/contracts"),
-  logLevel: "debug",
+  logLevel: "trace",
   consumer: "Console",
   provider: "SOR",
   spec: 3,
@@ -15,13 +15,13 @@ const correlationId = "bd65946a-81f7-43c2-871e-62067d98c5b2";
 
 describe("GET Test Details by ID", () => {
   it("Returns an HTTP 404 when ID is non-existent", () => {
-    const missingSensorId = "33e034b2-e45d-4e5d-8e11-0436c17dc977";
+    const missingTestId = "33e034b2-e45d-4e5d-8e11-0436c17dc977";
     pact
       .given(`There is no test details`)
       .uponReceiving(`A request for test details by non-existent ID`)
       .withRequest({
         method: "GET",
-        path: `/api/v2/status/${missingSensorId}`,
+        path: `/api/v2/test/${missingTestId}`,
         headers: {
           Accept: "application/json",
           "X-Tenant-Id": tenantId,
@@ -37,7 +37,7 @@ describe("GET Test Details by ID", () => {
     return pact.executeTest(async (mockserver) => {
       const client = testClient(correlationId, tenantId);
       await expect(
-        await client.getTestDetails(missingSensorId),
+        await client.getTestDetails(missingTestId),
       ).rejects.toThrow("Request failed with status code 404");
     });
   });
@@ -52,7 +52,7 @@ describe("GET Test Details by ID", () => {
       .uponReceiving(`A request for test details by ID`)
       .withRequest({
         method: "GET",
-        path: `/api/v2/status/${testId}`,
+        path: `/api/v2/test/${testId}`,
         headers: {
           Accept: "application/json",
           "X-Tenant-Id": tenantId,
