@@ -1,6 +1,6 @@
 import routes from "utils/routes";
 import { v4 as uuidv4 } from "uuid";
-import { ClientInterface } from "./(types)/hl-client.interface";
+import { ClientInterface } from "./(types)/client.interface";
 import { HttpOptions } from "./(types)/http-options";
 
 // Errors are NOT caught. Caller should handle them.
