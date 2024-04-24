@@ -1,0 +1,66 @@
+{
+  "consumer": {
+    "name": "Console"
+  },
+  "interactions": [
+    {
+      "description": "A request for model details by sensorId",
+      "providerState": "Model details for sensorId exist",
+      "request": {
+        "headers": {
+          "Accept": "application/json",
+          "X-Correlation-Id": "bd65946a-81f7-43c2-871e-62067d98c5b2",
+          "X-Tenant-Id": "60e64fdb-0d9e-42d9-8105-c50b9ebc96a0"
+        },
+        "method": "GET",
+        "path": "/api/v2/status/febf64ec-4e40-453e-932a-1e32e3de3aaf"
+      },
+      "response": {
+        "body": {
+          "status": "StatusAccepted"
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "A request for model details by non-existent sensorId",
+      "providerState": "There is no model details for sensorId",
+      "request": {
+        "headers": {
+          "Accept": "application/json",
+          "X-Correlation-Id": "bd65946a-81f7-43c2-871e-62067d98c5b2",
+          "X-Tenant-Id": "60e64fdb-0d9e-42d9-8105-c50b9ebc96a0"
+        },
+        "method": "GET",
+        "path": "/api/v2/status/33e034b2-e45d-4e5d-8e11-0436c17dc977"
+      },
+      "response": {
+        "body": {
+          "error": "no rows in result set"
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "status": 404
+      }
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "12.3.0"
+    },
+    "pactRust": {
+      "ffi": "0.4.16",
+      "models": "1.1.19"
+    },
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  },
+  "provider": {
+    "name": "SOR"
+  }
+}

@@ -1,0 +1,1 @@
+Example issue with Pact and fetch
