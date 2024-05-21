@@ -14,6 +14,7 @@ async function http<T extends object>(
     ? `?${new URLSearchParams(queryParameters).toString()}`
     : "";
   const fullUrl = `${route}${queryParamString}`;
+  console.log("My fullUrl is: ", fullUrl);
   const res = await fetch(fullUrl, {
     method,
     headers: {
@@ -43,7 +44,7 @@ async function http<T extends object>(
   });
 }
 
-function client(token, tenantId = "", callbacks = {}): ClientInterface {
+function client(token, tenantId = "", callbacks = {}, baseUrl?: string): ClientInterface {
   const opt = {
     callbacks,
     headers: {
@@ -56,7 +57,7 @@ function client(token, tenantId = "", callbacks = {}): ClientInterface {
 
   return {
     getTestDetails: (sensorId) =>
-      http("GET", routes.testDetails(sensorId), opt)
+      http("GET", routes(baseUrl).testDetails(sensorId), opt)
   };
 }
 

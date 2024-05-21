@@ -35,7 +35,7 @@ describe("GET Test Details by ID", () => {
       });
 
     return pact.executeTest(async (mockserver) => {
-      const client = testClient(correlationId, tenantId);
+      const client = testClient(correlationId, tenantId, {}, mockserver.url);
       await expect(
         await client.getTestDetails(missingTestId),
       ).rejects.toThrow("Request failed with status code 404");
@@ -66,7 +66,7 @@ describe("GET Test Details by ID", () => {
       });
 
     return pact.executeTest(async (mockserver) => {
-      const client = testClient(correlationId, tenantId);
+      const client = testClient(correlationId, tenantId, {}, mockserver.url);
       const response = await client.getTestDetails(testId);
       // expect(response.status).toEqual(200);
       expect(response).toEqual(testDetails);

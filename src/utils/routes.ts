@@ -1,8 +1,12 @@
-const domain = 'https://api.stage.test';
+let domain = process.env.DOMAIN;
 
-const routes = {
-  testDetails: (testId: string) =>
-    `${domain}/api/v2/test/${testId}`,
+function routes(baseUrl?: string) {
+  if (baseUrl) {
+    domain = baseUrl;
+  }
+  return {
+    testDetails: (testId: string) => `${domain}/api/v2/test/${testId}`,
+  }
 };
 
 export default routes;
